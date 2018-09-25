@@ -54,7 +54,8 @@ pipeline {
                 //def dockerRemove = 'docker rm php-app'
                 //def dockerRun = "docker run --restart always --name php-app -p 8081:8081 -d krishh11234/php-app:${env.BUILD_NUMBER}"
                 sshagent(['prod-creds']) {
-                    try {
+                    script {
+                        try {
                         //sh "ssh -o StrictHostKeyChecking=no ec2-user@$prod_ip ${dockerStop}"
                         //sh "ssh -o StrictHostKeyChecking=no ec2-user@$prod_ip ${dockerRemove}"
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@$prod_ip \"docker stop php-app\""
@@ -64,6 +65,7 @@ pipeline {
                     }
                     //sh "ssh -o StrictHostKeyChecking=no ec2-user@$prod_ip ${dockerRun}"
                     sh "ssh -o StrictHostKeyChecking=no ec2-user@$prod_ip \"docker run --restart always --name php-app -p 8080:8080 -d krishh11234/php-app:${env.BUILD_NUMBER}\""
+                    }
                 }
             }
         }
