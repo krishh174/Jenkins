@@ -43,7 +43,7 @@ pipeline {
                        }
                    }
     }
-        stages('Deploy to Production environment') {
+        stage('Deploy to Production environment') {
             when {
                 branch 'master'
             }
