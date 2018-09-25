@@ -39,9 +39,30 @@ pipeline {
                         } catch (err) {
                             echo: 'caught error: $err'
                         }
-                        sh "docker run --restart always --name php-app -p 80:80 -d krishh11234/php-app:${env.BUILD_NUMBER}"
+                        sh "docker run --restart always --name php-app -p 8081:8081 -d krishh11234/php-app:${env.BUILD_NUMBER}"
                        }
                    }
     }
+        stage('Deploy to Production environment') {
+            when {
+                branch 'master'
+            }
+            steps {
+                input 'Deploy to Production?'
+                milestone(1)
+                def dockerStop = docker stop php-app
+                def dockerRemove = docker rm php-app
+                def dockerRun = "docker run --restart always --name php-app -p 8081:8081 -d krishh11234/php-app:${env.BUILD_NUMBER}"
+                sshagent(['prod-creds']) {
+                    try {
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@$prod_ip ${dockerStop}"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@$prod_ip ${dockerRemove}"
+                    } catch (err) {
+                        echo: 'caught error: $err'
+                    }
+                    sh "ssh -o StrictHostKeyChecking=no ec2-user@$prod_ip ${dockerRun}"
+                }
+            }
+        }
   }
 }
