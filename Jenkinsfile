@@ -48,11 +48,11 @@ pipeline {
                 branch 'master'
             }
             steps {
-                def dockerStop = docker stop php-app
-                def dockerRemove = docker rm php-app
-                def dockerRun = "docker run --restart always --name php-app -p 8081:8081 -d krishh11234/php-app:${env.BUILD_NUMBER}"
                 input 'Deploy to Production?'
                 milestone(1)
+                def dockerStop = 'docker stop php-app'
+                def dockerRemove = 'docker rm php-app'
+                def dockerRun = "docker run --restart always --name php-app -p 8081:8081 -d krishh11234/php-app:${env.BUILD_NUMBER}"
                 sshagent(['prod-creds']) {
                     try {
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@$prod_ip ${dockerStop}"
