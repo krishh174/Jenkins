@@ -27,7 +27,7 @@ pipeline {
                 }
             }
         }
-        stage('Deploy PHP Dockerized Application')
+        stage('Deploy PHP Dockerized Application') {
             when {
                 branch 'master'
             }
@@ -43,4 +43,5 @@ pipeline {
                        }
                    }
     }
+  }
 }
