@@ -39,7 +39,7 @@ pipeline {
                         } catch (err) {
                             echo: 'caught error: $err'
                         }
-                        sh "docker run --restart always --name php-app -p 80:80 -d krishh11234/php-app:${env.BUILD_NUMBER}"
+                        sh "docker run --restart always --name php-app -p 8080:8080 -d krishh11234/php-app:${env.BUILD_NUMBER}"
                        }
                    }
     }
