@@ -43,11 +43,11 @@ pipeline {
                        }
                    }
     }
-        stage('Deploy to Production environment') {
+        stages('Deploy to Production environment') {
             when {
                 branch 'master'
             }
-            step {
+            steps {
                 input 'Deploy to Production?'
                 milestone(1)
                 def dockerStop = 'docker stop php-app'
