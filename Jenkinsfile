@@ -27,5 +27,20 @@ pipeline {
                 }
             }
         }
+        stage('Deploy PHP Dockerized Application')
+            when {
+                branch 'master'
+            }
+            steps {
+                script {
+                    try {
+                            sh "docker stop php-app"
+                            sh "docker rm php-app"
+                        } catch (err) {
+                            echo: 'caught error: $err'
+                        }
+                        sh "docker run --restart always --name php-app -p 80:80 -d krishh11234/php-app:${env.BUILD_NUMBER}"
+                       }
+                   }
     }
 }
