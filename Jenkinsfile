@@ -46,7 +46,8 @@ pipeline {
         stage('Deploy to Production environment') {
             when {
                 branch 'master'
-            } 
+            }
+            step {
                 input 'Deploy to Production?'
                 milestone(1)
                 def dockerStop = 'docker stop php-app'
@@ -61,6 +62,7 @@ pipeline {
                     }
                     sh "ssh -o StrictHostKeyChecking=no ec2-user@$prod_ip ${dockerRun}"
                 }
+            }
         }
   }
 }
