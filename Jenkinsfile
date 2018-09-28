@@ -69,5 +69,12 @@ pipeline {
                 }
             }
         }
+        stage('Email regarding the Build') {
+            when {
+                branch 'master'
+            }
+            steps {
+               emailext body: 'Your Build was Successful', recipientProviders: [upstreamDevelopers()], subject: 'Jenkins Pipeline Project', to: 'saim.pro9@gmail.com' 
+            }
   }
 }
