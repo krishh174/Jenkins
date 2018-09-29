@@ -61,14 +61,14 @@ pipeline {
                 sshagent(['prod-creds']) {
                     script {
                         try {
-                        sh "ssh -o StrictHostKeyChecking=no ec2-user@$prod_ip ${dockerStop}"
-                        sh "ssh -o StrictHostKeyChecking=no ec2-user@$prod_ip ${dockerRemove}"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@$prod_ip ${def.dockerStop}"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@$prod_ip ${def.dockerRemove}"
                         //sh "ssh -o StrictHostKeyChecking=no ec2-user@$prod_ip \"docker stop php-app\""
                         //sh "ssh -o StrictHostKeyChecking=no ec2-user@$prod_ip \"docker rm php-app\""
                     } catch (err) {
                         echo: 'caught error: $err'
                     }
-                    sh "ssh -o StrictHostKeyChecking=no ec2-user@$prod_ip ${dockerRun}"
+                    sh "ssh -o StrictHostKeyChecking=no ec2-user@$prod_ip ${def.dockerRun}"
                     //sh "ssh -o StrictHostKeyChecking=no ec2-user@$prod_ip \"docker run --restart always --name php-app -p 80:80 -d krishh11234/php-app:${env.BUILD_NUMBER}\""
                     }
                 }
