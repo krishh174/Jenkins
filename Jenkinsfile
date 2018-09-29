@@ -1,4 +1,4 @@
-peline {
+pipeline {
     agent any
     stages {
         /*stage('SCM Checkout') {
@@ -86,4 +86,4 @@ peline {
             }
         }
   }
-} 
+}
