@@ -2,7 +2,9 @@ pipeline {
     agent any
     stages {
         stage('SCM Checkout') {
-            git credentialsId: 'github_api_key', url: 'https://github.com/krishh174/Jenkins'
+            steps {
+                git credentialsId: 'github_api_key', url: 'https://github.com/krishh174/Jenkins'
+            }
         }
         stage('Build Docker Image') {
             when {
