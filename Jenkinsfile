@@ -15,7 +15,7 @@ pipeline {
                     app = docker.build("krishh11234/php-app")
                     //app.inside {
                         //sh 'echo $(curl 18.191.162.96:80)'
-                    }
+                    //}
                 }
             }
         }
