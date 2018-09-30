@@ -18,7 +18,6 @@ pipeline {
                     }
                 }
             }
-        }
         stage('Smoke Test'){
             script {
                     app.inside {
