@@ -80,9 +80,12 @@ pipeline {
             }
             steps {
                //emailext body: 'Your Build was Successful', recipientProviders: [upstreamDevelopers()], subject: 'Jenkins Pipeline Project', to: 'saim.pro9@gmail.com' 
-               emailext body: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+               //emailext body: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
 
-                Check console output at $BUILD_URL to view the results.''', recipientProviders: [developers()], subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'saim.pro9@gmail.com'
+                //Check console output at $BUILD_URL to view the results.''', recipientProviders: [developers()], subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'saim.pro9@gmail.com'
+                emailext body: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+
+                Check console output at $BUILD_URL to view the results.''', compressLog: true, recipientProviders: [developers()], subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'saim.pro9@gmail.com'
             }
         }
   }
