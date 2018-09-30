@@ -18,11 +18,17 @@ pipeline {
                     }
                 }
             }
-        stage('Smoke Test'){
-            script {
+        }
+        stage('Smoke Test') {
+            when {
+                branch 'master'
+            }
+            steps {
+                script {
                     app.inside {
                         sh 'echo $(curl 18.191.162.96:80)'
                     }
+                }
             }
         }
         stage('Push Docker Image') {
