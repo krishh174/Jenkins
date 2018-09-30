@@ -26,7 +26,7 @@ pipeline {
             steps {
                 script {
                     app.inside {
-                        sh 'echo $(curl 18.191.162.96:80)'
+                        sh "echo $(curl $dev_ip:80)"
                     }
                 }
             }
