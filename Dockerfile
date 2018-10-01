@@ -7,5 +7,5 @@ ENV USER="php"
 CMD apachectl -D FOREGROUND
 RUN rm /var/www/html/index.html
 WORKDIR /home/$USER
-COPY src/ /var/www/html
+COPY php-app/ /var/www/html
 EXPOSE 80
