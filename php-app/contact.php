@@ -17,7 +17,7 @@
 		For additional details visit source code repository.
 	</p>
 	<p>
-		<a href=https://github.com>	
+		<a href=https://github.com></a>
 	</p>
 </div>
 
